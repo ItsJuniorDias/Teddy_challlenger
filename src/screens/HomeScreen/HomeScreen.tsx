@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, StatusBar, TouchableOpacity } from "react-native";
+import { Alert, FlatList, StatusBar, TouchableOpacity } from "react-native";
 import { IconBurger } from "../../assets/icons";
 import { Card } from "../../components";
+import api from "../../services/api";
 
 import {
   Container,
@@ -16,8 +17,7 @@ import {
   ContentHeader,
   FakeView,
 } from "./styles";
-import api from "../../services/api";
-import { CardProps } from "../../components/Card/Card";
+import { theme } from "../../theme/theme";
 
 export const HomeScreen = () => {
   const [data, setData] = useState([]);
@@ -36,13 +36,32 @@ export const HomeScreen = () => {
     fetch();
   }, []);
 
-  console.log(data, "DATA");
+  const removeItem = async (id: number) => {
+    await api.delete(`/users/${id}`);
+
+    fetch();
+  };
+
+  const alertItem = (id: number) => {
+    Alert.alert(
+      "Excluir cliente:",
+      "Tem certeza que deseja excluir o cliente Eduardo?",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "Excluir cliente", onPress: () => removeItem(id) },
+      ]
+    );
+  };
 
   return (
     <>
       <StatusBar
         animated={true}
-        backgroundColor="#FFFFFF"
+        backgroundColor={theme.colors.white}
         barStyle="dark-content"
       />
       <Container>
@@ -67,11 +86,12 @@ export const HomeScreen = () => {
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <Card
+                id={item.id}
                 name={item.name}
                 enterprises={item.companyValuation}
                 salary={item.salary}
                 onPressAdd={() => {}}
-                onPressDelete={() => {}}
+                onPressDelete={(id) => alertItem(id)}
                 onPressPlus={() => {}}
               />
             )}
