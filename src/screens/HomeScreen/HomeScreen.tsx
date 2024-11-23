@@ -1,7 +1,7 @@
 import React from "react";
-import { StatusBar, View } from "react-native";
+import { StatusBar, TouchableOpacity } from "react-native";
 
-// import Icon from "../../assets/icons/icon_burger.svg";
+import { IconBurger } from "../../assets/icons/IconBurger";
 
 import { Container, Header, Image } from "./styles";
 
@@ -15,9 +15,11 @@ export const HomeScreen = () => {
       />
       <Container>
         <Header>
-          {/* <Image source={require("../../assets/image/logo.png")} /> */}
+          <Image source={require("../../assets/image/logo.png")} />
 
-          {/* <Icon width="32px" height="32px" /> */}
+          <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
+            <IconBurger />
+          </TouchableOpacity>
         </Header>
       </Container>
     </>
