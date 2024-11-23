@@ -4,9 +4,12 @@ import { View } from "react-native";
 import { Input, Button } from "../../components";
 
 import { Container, Title } from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 export const WelcomeScreen = () => {
   const [text, onChange] = React.useState("");
+
+  const navigation = useNavigation();
 
   return (
     <Container>
@@ -14,7 +17,7 @@ export const WelcomeScreen = () => {
 
       <Input value={text} onChange={onChange} />
 
-      <Button onPress={() => {}} />
+      <Button onPress={() => navigation.navigate("Home")} />
     </Container>
   );
 };
