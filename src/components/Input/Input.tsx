@@ -3,13 +3,16 @@ import { View } from "react-native";
 
 import { TextInput } from "./styles";
 
-export const Input = () => {
-  const [text, onChange] = React.useState("");
+interface InputProps {
+  value: string;
+  onChange: React.Dispatch<React.SetStateAction<string>>;
+}
 
+export const Input = ({ value, onChange }: InputProps) => {
   return (
     <TextInput
       onChangeText={onChange}
-      value={text}
+      value={value}
       placeholder="Digite o seu nome"
     />
   );
