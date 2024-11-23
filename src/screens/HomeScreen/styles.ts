@@ -33,6 +33,10 @@ export const Image = styled.Image`
   margin-top: 16px;
 `;
 
+export const ContentHeader = styled.View`
+  align-items: center;
+`;
+
 export const Title = styled.Text`
   font-family: ${() => theme.fonts.regular};
   font-size: 18px;
@@ -74,4 +78,12 @@ export const TextButton = styled.Text`
 export const ContentButton = styled.View`
   padding-left: 24px;
   padding-right: 24px;
+  /* background-color: red; */
+  padding-bottom: 64px;
+`;
+
+export const FakeView = styled.View`
+  height: 96px;
+  width: 100%;
+  /* background-color: blue; */
 `;

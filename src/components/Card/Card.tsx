@@ -1,27 +1,43 @@
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { IconAdd } from "../../assets/icons";
 
 import { Container, TitleBold, Text, Row, Image } from "./styles";
 
-export const Card = () => {
+export interface CardProps {
+  onPressAdd: () => void;
+  onPressPlus: () => void;
+  onPressDelete: () => void;
+  salary: number;
+  enterprises: number;
+  name: string;
+}
+
+export const Card = ({
+  enterprises,
+  name,
+  salary,
+  onPressAdd,
+  onPressDelete,
+  onPressPlus,
+}: CardProps) => {
   return (
     <Container>
-      <TitleBold>Eduardo</TitleBold>
-      <Text>Salário: R$3.500,00</Text>
+      <TitleBold>{name}</TitleBold>
+      <Text>Salário: R${salary}</Text>
 
-      <Text>Empresa: R$120.000,00</Text>
+      <Text>Empresa: R${enterprises}</Text>
 
       <Row>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={onPressAdd}>
           <IconAdd />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={onPressPlus}>
           <Image source={require("../../assets/image/plus.png")} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={onPressDelete}>
           <Image source={require("../../assets/image/delete.png")} />
         </TouchableOpacity>
       </Row>
