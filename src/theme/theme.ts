@@ -9,6 +9,7 @@ interface ThemeProps {
     white: string;
     grayInput: string;
     black: string;
+    grayBackground: string;
   };
 }
 
@@ -23,5 +24,6 @@ export const theme: ThemeProps = {
     white: "#ffffff",
     grayInput: "#d9d9d9",
     black: "#000000",
+    grayBackground: "#F5F5F5",
   },
 };
