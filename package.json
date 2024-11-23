@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator='iPhone 15'",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "react": "18.3.1",
