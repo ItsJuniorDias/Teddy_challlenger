@@ -1,9 +1,19 @@
 import React from "react";
 import { StatusBar, TouchableOpacity } from "react-native";
+import { IconBurger } from "../../assets/icons";
+import { Card } from "../../components";
 
-import { IconBurger } from "../../assets/icons/IconBurger";
-
-import { Container, Header, Image } from "./styles";
+import {
+  Container,
+  Header,
+  Image,
+  Title,
+  Content,
+  TitleBold,
+  Button,
+  TextButton,
+  ContentButton,
+} from "./styles";
 
 export const HomeScreen = () => {
   return (
@@ -21,6 +31,22 @@ export const HomeScreen = () => {
             <IconBurger />
           </TouchableOpacity>
         </Header>
+
+        <Content>
+          <Title>
+            <TitleBold>2</TitleBold> clientes encontrados:
+          </Title>
+
+          <Card />
+
+          <Card />
+        </Content>
+
+        <ContentButton>
+          <Button>
+            <TextButton>Criar cliente</TextButton>
+          </Button>
+        </ContentButton>
       </Container>
     </>
   );

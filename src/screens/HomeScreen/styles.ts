@@ -32,3 +32,46 @@ export const Image = styled.Image`
   height: 34px;
   margin-top: 16px;
 `;
+
+export const Title = styled.Text`
+  font-family: ${() => theme.fonts.regular};
+  font-size: 18px;
+  color: ${() => theme.colors.black};
+`;
+
+export const TitleBold = styled.Text`
+  font-family: ${() => theme.fonts.bold};
+  font-size: 18px;
+  color: ${() => theme.colors.black};
+  font-weight: 700;
+`;
+
+export const Content = styled.View`
+  align-items: center;
+  margin-top: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+`;
+
+export const Button = styled.TouchableOpacity`
+  width: 100%;
+  height: 48px;
+  border-width: 2px;
+  border-color: ${() => theme.colors.primaryButton};
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-top: 24px;
+`;
+
+export const TextButton = styled.Text`
+  font-family: ${() => theme.fonts.bold};
+  font-size: 16px;
+  color: ${() => theme.colors.primaryButton};
+  font-weight: 700;
+`;
+
+export const ContentButton = styled.View`
+  padding-left: 24px;
+  padding-right: 24px;
+`;
