@@ -2,7 +2,6 @@ import React from "react";
 import { View } from "react-native";
 
 import { TextInput } from "./styles";
-
 interface InputProps {
   value: string;
   onChange: React.Dispatch<React.SetStateAction<string>>;
