@@ -7,6 +7,10 @@ import {
 import { WelcomeScreen } from "../screens";
 
 const RootStack = createNativeStackNavigator({
+  initialRouteName: "Welcome",
+  screenOptions: {
+    headerShown: false,
+  },
   screens: {
     Home: HomeScreen,
     Welcome: WelcomeScreen,
