@@ -10,6 +10,7 @@ interface InputProps {
 export const Input = ({ value, onChange }: InputProps) => {
   return (
     <TextInput
+      testID="input_id"
       onChangeText={onChange}
       value={value}
       placeholder="Digite o seu nome"

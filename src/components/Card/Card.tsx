@@ -31,15 +31,18 @@ export const Card = ({
       <Text>Empresa: R${enterprises}</Text>
 
       <Row>
-        <TouchableOpacity onPress={onPressAdd}>
+        <TouchableOpacity testID="touchable_add_id" onPress={onPressAdd}>
           <IconAdd />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={onPressPlus}>
+        <TouchableOpacity testID="touchable_plus_id" onPress={onPressPlus}>
           <Image source={require("../../assets/image/plus.png")} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onPressDelete(id)}>
+        <TouchableOpacity
+          testID="touchable_delete_id"
+          onPress={() => onPressDelete(id)}
+        >
           <Image source={require("../../assets/image/delete.png")} />
         </TouchableOpacity>
       </Row>

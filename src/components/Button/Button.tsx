@@ -9,7 +9,7 @@ interface ButtonProps {
 
 export const Button = ({ onPress }: ButtonProps) => {
   return (
-    <Touchable onPress={onPress} activeOpacity={0.7}>
+    <Touchable testID="touchable_id" onPress={onPress} activeOpacity={0.7}>
       <Title>Entrar</Title>
     </Touchable>
   );
