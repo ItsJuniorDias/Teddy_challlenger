@@ -13,7 +13,7 @@ export const WelcomeScreen = () => {
 
   return (
     <Container>
-      <Title>Olá, seja bem-vindo!</Title>
+      <Title testID="title_id">Olá, seja bem-vindo!</Title>
 
       <Input value={text} onChange={onChange} />
 
