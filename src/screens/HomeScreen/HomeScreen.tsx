@@ -18,15 +18,18 @@ import {
   FakeView,
 } from "./styles";
 import { theme } from "../../theme/theme";
+import axios from "axios";
+
+const baseURL = "https://boasorte.teddybackoffice.com.br";
 
 export const HomeScreen = () => {
   const [data, setData] = useState([]);
 
   const fetch = async () => {
     try {
-      const response = await api.get("/users");
+      const { data } = await axios.get(`${baseURL}/users`);
 
-      setData(response.data.clients);
+      setData(data.clients);
     } catch (error) {
       console.log(error);
     }
@@ -37,7 +40,7 @@ export const HomeScreen = () => {
   }, []);
 
   const removeItem = async (id: number) => {
-    await api.delete(`/users/${id}`);
+    await axios.delete(`${baseURL}/users/${id}`);
 
     fetch();
   };
@@ -75,6 +78,7 @@ export const HomeScreen = () => {
 
         <Content>
           <FlatList
+            testID="flatlist_id"
             data={data}
             ListHeaderComponent={
               <ContentHeader>

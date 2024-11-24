@@ -23,12 +23,26 @@ export const Card = ({
   onPressDelete,
   onPressPlus,
 }: CardProps) => {
+  const formatCurrency = (
+    amount: number,
+    locale = "en-US",
+    currency = "USD"
+  ) => {
+    return new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency,
+    }).format(amount);
+  };
+
   return (
     <Container>
       <TitleBold>{name}</TitleBold>
-      <Text>Salário: R${salary}</Text>
+      <Text>
+        Salário: R$
+        {formatCurrency(salary)}
+      </Text>
 
-      <Text>Empresa: R${enterprises}</Text>
+      <Text>Empresa: R${formatCurrency(enterprises)}</Text>
 
       <Row>
         <TouchableOpacity testID="touchable_add_id" onPress={onPressAdd}>

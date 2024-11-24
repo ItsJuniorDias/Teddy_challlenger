@@ -76,9 +76,7 @@ export const TextButton = styled.Text`
 `;
 
 export const ContentButton = styled.View`
-  padding-left: 24px;
-  padding-right: 24px;
-  /* background-color: red; */
+  width: 100%;
   padding-bottom: 64px;
 `;
 
