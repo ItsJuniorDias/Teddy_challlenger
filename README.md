@@ -1,10 +1,4 @@
- 
-<img width="362" alt="Captura de Tela 2024-11-25 às 15 04 23" src="https://github.com/user-attachments/assets/947a7aaf-87b3-4c90-ad03-1651b629f64f">
-
-<img width="363" alt="Captura de Tela 2024-11-25 às 15 04 42" src="https://github.com/user-attachments/assets/9997662a-8707-4717-a3c5-65d0e7d15d4b">
-
-<img width="354" alt="Captura de Tela 2024-11-25 às 15 04 52" src="https://github.com/user-attachments/assets/be9e7480-95d0-4c23-8d85-a7eeda7e43e2">
-
+ ![Captura de Tela 2024-11-25 às 15 04 23-side](https://github.com/user-attachments/assets/dd6af49a-3b0f-435e-88b9-e71921b0414b)
 
 # Getting Started
 
