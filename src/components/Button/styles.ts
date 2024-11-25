@@ -3,7 +3,7 @@ import { theme } from "../../theme/theme";
 
 export const Touchable = styled.TouchableOpacity`
   width: 100%;
-  height: 60px;
+  height: 48px;
   background-color: ${() => theme.colors.primaryButton};
   border-radius: 8px;
   align-items: center;
@@ -13,7 +13,7 @@ export const Touchable = styled.TouchableOpacity`
 
 export const Title = styled.Text`
   font-family: ${() => theme.fonts.bold};
-  font-size: 24px;
+  font-size: 18px;
   color: ${() => theme.colors.white};
   font-weight: 700;
 `;

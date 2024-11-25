@@ -1,6 +1,5 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react-native";
-import { ThemeProvider } from "styled-components/native";
 
 import { Button } from "../Button/Button";
 

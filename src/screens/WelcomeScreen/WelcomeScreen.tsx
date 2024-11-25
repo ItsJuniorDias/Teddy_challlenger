@@ -17,7 +17,7 @@ export const WelcomeScreen = () => {
 
       <Input value={text} onChange={onChange} />
 
-      <Button onPress={() => navigation.navigate("Home")} />
+      <Button title="Entrar" onPress={() => navigation.navigate("Home")} />
     </Container>
   );
 };

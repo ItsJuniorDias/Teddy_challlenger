@@ -57,7 +57,7 @@ export const Content = styled.View`
   padding-right: 24px;
 `;
 
-export const Button = styled.TouchableOpacity`
+export const ButtonOutline = styled.TouchableOpacity`
   width: 100%;
   height: 48px;
   border-width: 2px;
@@ -97,7 +97,7 @@ export const HeaderBottomSheet = styled.View`
 export const ContentModal = styled.View`
   padding-right: 32px;
   padding-left: 32px;
-  background-color: red;
+  /* background-color: red; */
   margin-top: 24px;
 `;
 

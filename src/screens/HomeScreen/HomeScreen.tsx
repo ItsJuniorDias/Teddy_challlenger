@@ -9,8 +9,10 @@ import {
   View,
 } from "react-native";
 import { IconBurger } from "../../assets/icons";
-import { Card } from "../../components";
+import { Button, Card, InputBottomSheet } from "../../components";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { theme } from "../../theme/theme";
+import axios from "axios";
 
 import {
   Container,
@@ -19,7 +21,7 @@ import {
   Title,
   Content,
   TitleBold,
-  Button,
+  ButtonOutline,
   TextButton,
   ContentButton,
   ContentHeader,
@@ -28,16 +30,40 @@ import {
   ContentModal,
   TitleBottomSheet,
 } from "./styles";
-import { theme } from "../../theme/theme";
-import axios from "axios";
 
 const baseURL = "https://boasorte.teddybackoffice.com.br";
 
 export const HomeScreen = () => {
   const [data, setData] = useState([]);
-
   const [expanded, setExpanded] = useState(false);
   const animation = useRef(new Animated.Value(0)).current;
+
+  const [value, setValue] = useState({
+    name: "",
+    currency: "",
+    companyValue: "",
+  });
+
+  const onChangeName = (item: string) => {
+    setValue((prevState) => ({
+      ...prevState,
+      name: item,
+    }));
+  };
+
+  const onChangeCurrency = (item: string) => {
+    setValue((prevState) => ({
+      ...prevState,
+      currency: item,
+    }));
+  };
+
+  const onChangeCompany = (item: string) => {
+    setValue((prevState) => ({
+      ...prevState,
+      companyValue: item,
+    }));
+  };
 
   const toggleExpand = () => {
     const finalValue = expanded ? 0 : 502; // Final height (collapse or expand)
@@ -127,9 +153,9 @@ export const HomeScreen = () => {
             )}
             ListFooterComponent={
               <ContentButton>
-                <Button onPress={() => toggleExpand()}>
+                <ButtonOutline onPress={() => toggleExpand()}>
                   <TextButton>Criar cliente</TextButton>
-                </Button>
+                </ButtonOutline>
               </ContentButton>
             }
             keyExtractor={(item) => item.id}
@@ -150,6 +176,27 @@ export const HomeScreen = () => {
 
         <ContentModal>
           <TitleBottomSheet>Criar cliente</TitleBottomSheet>
+
+          <InputBottomSheet
+            title="Nome"
+            textPlaceHolder="Digite o nome:"
+            onChange={(item) => onChangeName(item)}
+            value={value.name}
+          />
+          <InputBottomSheet
+            title="Salário"
+            textPlaceHolder="Digite o salário:"
+            onChange={(item) => onChangeCurrency(item)}
+            value={value.currency}
+          />
+          <InputBottomSheet
+            title="Valor da empresa"
+            textPlaceHolder="Digite o valor da empresa:"
+            onChange={(item) => onChangeCompany(item)}
+            value={value.companyValue}
+          />
+
+          <Button title="Criar cliente" onPress={() => toggleExpand()} />
         </ContentModal>
       </Animated.View>
     </>
