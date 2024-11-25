@@ -85,3 +85,25 @@ export const FakeView = styled.View`
   width: 100%;
   /* background-color: blue; */
 `;
+
+export const HeaderBottomSheet = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 32px;
+  padding-left: 32px;
+  margin-top: 24px;
+`;
+
+export const ContentModal = styled.View`
+  padding-right: 32px;
+  padding-left: 32px;
+  background-color: red;
+  margin-top: 24px;
+`;
+
+export const TitleBottomSheet = styled.Text`
+  font-family: ${() => theme.fonts.semiBold};
+  font-size: 18px;
+  color: ${() => theme.colors.white};
+  font-weight: 700;
+`;

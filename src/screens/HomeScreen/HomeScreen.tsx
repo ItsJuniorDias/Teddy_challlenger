@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Alert, FlatList, StatusBar, TouchableOpacity } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Alert,
+  Animated,
+  FlatList,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { IconBurger } from "../../assets/icons";
 import { Card } from "../../components";
-import api from "../../services/api";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 import {
   Container,
@@ -16,6 +24,9 @@ import {
   ContentButton,
   ContentHeader,
   FakeView,
+  HeaderBottomSheet,
+  ContentModal,
+  TitleBottomSheet,
 } from "./styles";
 import { theme } from "../../theme/theme";
 import axios from "axios";
@@ -24,6 +35,21 @@ const baseURL = "https://boasorte.teddybackoffice.com.br";
 
 export const HomeScreen = () => {
   const [data, setData] = useState([]);
+
+  const [expanded, setExpanded] = useState(false);
+  const animation = useRef(new Animated.Value(0)).current;
+
+  const toggleExpand = () => {
+    const finalValue = expanded ? 0 : 502; // Final height (collapse or expand)
+
+    Animated.timing(animation, {
+      toValue: finalValue,
+      duration: 300, // Animation duration
+      useNativeDriver: false, // Height animations require `useNativeDriver: false`
+    }).start();
+
+    setExpanded(!expanded);
+  };
 
   const fetch = async () => {
     try {
@@ -101,7 +127,7 @@ export const HomeScreen = () => {
             )}
             ListFooterComponent={
               <ContentButton>
-                <Button>
+                <Button onPress={() => toggleExpand()}>
                   <TextButton>Criar cliente</TextButton>
                 </Button>
               </ContentButton>
@@ -112,6 +138,30 @@ export const HomeScreen = () => {
       </Container>
 
       <FakeView />
+
+      <Animated.View style={[styles.animatedView, { height: animation }]}>
+        <HeaderBottomSheet>
+          <View />
+
+          <TouchableOpacity onPress={() => toggleExpand()}>
+            <Icon name="close" size={24} color={theme.colors.white} />
+          </TouchableOpacity>
+        </HeaderBottomSheet>
+
+        <ContentModal>
+          <TitleBottomSheet>Criar cliente</TitleBottomSheet>
+        </ContentModal>
+      </Animated.View>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  animatedView: {
+    width: "100%",
+    backgroundColor: theme.colors.grayBottom,
+    overflow: "hidden",
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+  },
+});

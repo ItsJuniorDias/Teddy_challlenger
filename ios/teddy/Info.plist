@@ -52,6 +52,8 @@
 		<string>InterBold.ttf</string>
 		<string>InterRegular.ttf</string>
 		<string>InterSemiBold.ttf</string>
+		 <string>Ionicons.ttf</string>
+  	<string>MaterialIcons.ttf</string>
 	</array>
 </dict>
 </plist>
