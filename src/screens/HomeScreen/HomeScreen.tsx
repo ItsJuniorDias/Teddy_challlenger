@@ -40,8 +40,8 @@ export const HomeScreen = () => {
 
   const [value, setValue] = useState({
     name: "",
-    currency: "",
-    companyValue: "",
+    currency: 0,
+    companyValue: 0,
   });
 
   const onChangeName = (item: string) => {
@@ -54,24 +54,32 @@ export const HomeScreen = () => {
   const onChangeCurrency = (item: string) => {
     setValue((prevState) => ({
       ...prevState,
-      currency: item,
+      currency: Number(item),
     }));
   };
 
   const onChangeCompany = (item: string) => {
     setValue((prevState) => ({
       ...prevState,
-      companyValue: item,
+      companyValue: Number(item),
     }));
   };
 
+  const createUser = async () => {
+    await axios.post(`${baseURL}/users`, value);
+
+    toggleExpand();
+
+    fetch();
+  };
+
   const toggleExpand = () => {
-    const finalValue = expanded ? 0 : 502; // Final height (collapse or expand)
+    const finalValue = expanded ? 0 : 502;
 
     Animated.timing(animation, {
       toValue: finalValue,
-      duration: 300, // Animation duration
-      useNativeDriver: false, // Height animations require `useNativeDriver: false`
+      duration: 300,
+      useNativeDriver: false,
     }).start();
 
     setExpanded(!expanded);
@@ -196,7 +204,7 @@ export const HomeScreen = () => {
             value={value.companyValue}
           />
 
-          <Button title="Criar cliente" onPress={() => toggleExpand()} />
+          <Button title="Criar cliente" onPress={createUser} />
         </ContentModal>
       </Animated.View>
     </>

@@ -21,6 +21,7 @@ export const InputBottomSheet = ({
     <Container>
       <TextInput>{title}</TextInput>
       <Input
+        testID="input_id"
         value={value}
         onChangeText={onChange}
         placeholder={textPlaceHolder}
