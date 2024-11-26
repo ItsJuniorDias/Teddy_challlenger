@@ -5,6 +5,8 @@ import { HomeScreen } from "../HomeScreen/HomeScreen";
 
 import { Alert } from "react-native";
 
+jest.mock("react-native-vector-icons/MaterialIcons", () => "Icon");
+
 jest.mock("axios", () => ({
   create: jest.fn(),
   delete: jest.fn(),
