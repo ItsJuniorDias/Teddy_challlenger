@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react-native";
+import { fireEvent, render } from "@testing-library/react-native";
 
 import { HomeScreen } from "../HomeScreen/HomeScreen";
 
@@ -10,6 +10,7 @@ jest.mock("react-native-vector-icons/MaterialIcons", () => "Icon");
 jest.mock("axios", () => ({
   create: jest.fn(),
   delete: jest.fn(),
+  post: jest.fn(),
   get: jest.fn(() => ({
     data: {
       clients: [
@@ -62,5 +63,37 @@ describe("Behavior HomeScreen", () => {
     alertMock?.mock?.calls[0][2][1].onPress();
 
     expect(alertMock).toHaveBeenCalled();
+  });
+
+  it("should call funtion toggleExpand", () => {
+    const { getByTestId, debug } = render(screenRender);
+
+    const flatlist = getByTestId("flatlist_id");
+
+    flatlist.props.ListFooterComponent.props.children.props.onPress();
+
+    const input_name = getByTestId("input_name");
+
+    fireEvent.changeText(input_name, "Alexandre Junior");
+
+    const input_currency = getByTestId("input_currency");
+
+    fireEvent.changeText(input_currency, "3000");
+
+    const input_company = getByTestId("input_company");
+
+    fireEvent.changeText(input_company, "5000");
+
+    const button = getByTestId("touchable_id");
+
+    fireEvent.press(button);
+
+    const button_close = getByTestId("button_close");
+
+    fireEvent.press(button_close);
+
+    debug();
+
+    expect(flatlist).toBeTruthy();
   });
 });

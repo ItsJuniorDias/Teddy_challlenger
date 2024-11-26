@@ -5,6 +5,7 @@ import { Container, Input, TextInput } from "./styles";
 import { theme } from "../../theme/theme";
 
 interface InputProps {
+  testID: string;
   title: string;
   textPlaceHolder: string;
   value: string;
@@ -12,6 +13,7 @@ interface InputProps {
 }
 
 export const InputBottomSheet = ({
+  testID,
   title,
   textPlaceHolder,
   value,
@@ -21,7 +23,7 @@ export const InputBottomSheet = ({
     <Container>
       <TextInput>{title}</TextInput>
       <Input
-        testID="input_id"
+        testID={testID}
         value={value}
         onChangeText={onChange}
         placeholder={textPlaceHolder}

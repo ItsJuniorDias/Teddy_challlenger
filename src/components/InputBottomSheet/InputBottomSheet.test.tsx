@@ -8,6 +8,7 @@ describe("Behavior InputBottomSheet", () => {
 
   const screenRender = (
     <InputBottomSheet
+      testID="input_id"
       title="Nome"
       textPlaceHolder="Digite o nome"
       value="Alexandre Junior"

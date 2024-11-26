@@ -177,7 +177,10 @@ export const HomeScreen = () => {
         <HeaderBottomSheet>
           <View />
 
-          <TouchableOpacity onPress={() => toggleExpand()}>
+          <TouchableOpacity
+            testID="button_close"
+            onPress={() => toggleExpand()}
+          >
             <Icon name="close" size={24} color={theme.colors.white} />
           </TouchableOpacity>
         </HeaderBottomSheet>
@@ -186,18 +189,21 @@ export const HomeScreen = () => {
           <TitleBottomSheet>Criar cliente</TitleBottomSheet>
 
           <InputBottomSheet
+            testID="input_name"
             title="Nome"
             textPlaceHolder="Digite o nome:"
             onChange={(item) => onChangeName(item)}
             value={value.name}
           />
           <InputBottomSheet
+            testID="input_currency"
             title="Salário"
             textPlaceHolder="Digite o salário:"
             onChange={(item) => onChangeCurrency(item)}
             value={value.currency}
           />
           <InputBottomSheet
+            testID="input_company"
             title="Valor da empresa"
             textPlaceHolder="Digite o valor da empresa:"
             onChange={(item) => onChangeCompany(item)}
