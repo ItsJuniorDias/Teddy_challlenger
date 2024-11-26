@@ -1,5 +1,9 @@
  ![Captura de Tela 2024-11-25 às 15 04 23-side](https://github.com/user-attachments/assets/dd6af49a-3b0f-435e-88b9-e71921b0414b)
 
+ ### Unit Test
+
+ <img width="641" alt="Captura de Tela 2024-11-26 às 12 07 39" src="https://github.com/user-attachments/assets/a352c678-ac6e-4fe9-a47a-e2ae56804d6f">
+
 # Getting Started
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
