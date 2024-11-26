@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { Touchable, Title } from "./styles";
 
 interface ButtonProps {
-  testID: string;
+  testID?: string;
   title: string;
   onPress: () => void;
 }

@@ -33,12 +33,20 @@ import {
 
 const baseURL = "https://boasorte.teddybackoffice.com.br";
 
+interface ValueProps {
+  id?: number;
+  name?: string;
+  currency?: number;
+  companyValue?: number;
+}
+
 export const HomeScreen = () => {
   const [data, setData] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const animation = useRef(new Animated.Value(0)).current;
 
-  const [value, setValue] = useState({
+  const [value, setValue] = useState<ValueProps>({
+    id: 0,
     name: "",
     currency: 0,
     companyValue: 0,
@@ -65,15 +73,32 @@ export const HomeScreen = () => {
     }));
   };
 
-  const createUser = async () => {
-    await axios.post(`${baseURL}/users`, value);
+  const updateUser = async (id: number) => {
+    await axios.patch(`${baseURL}/users/${id}`, value);
 
-    toggleExpand();
+    toggleExpand({});
 
     fetch();
   };
 
-  const toggleExpand = () => {
+  const createUser = async () => {
+    await axios.post(`${baseURL}/users`, value);
+
+    toggleExpand({});
+
+    fetch();
+  };
+
+  const toggleExpand = ({ id, name, currency, companyValue }: ValueProps) => {
+    if (name !== "" && currency !== 0 && companyValue !== 0) {
+      setValue(() => ({
+        id: id,
+        name: name,
+        currency: currency,
+        companyValue: companyValue,
+      }));
+    }
+
     const finalValue = expanded ? 0 : 502;
 
     Animated.timing(animation, {
@@ -156,12 +181,19 @@ export const HomeScreen = () => {
                 salary={item.salary}
                 onPressAdd={() => {}}
                 onPressDelete={(id) => alertItem(id)}
-                onPressPlus={() => {}}
+                onPressPlus={() => {
+                  toggleExpand({
+                    id: item.id,
+                    name: item.name,
+                    currency: item.salary,
+                    companyValue: item.companyValuation,
+                  });
+                }}
               />
             )}
             ListFooterComponent={
               <ContentButton>
-                <ButtonOutline onPress={() => toggleExpand()}>
+                <ButtonOutline onPress={() => toggleExpand({})}>
                   <TextButton>Criar cliente</TextButton>
                 </ButtonOutline>
               </ContentButton>
@@ -179,7 +211,7 @@ export const HomeScreen = () => {
 
           <TouchableOpacity
             testID="button_close"
-            onPress={() => toggleExpand()}
+            onPress={() => toggleExpand({})}
           >
             <Icon name="close" size={24} color={theme.colors.white} />
           </TouchableOpacity>
@@ -210,7 +242,16 @@ export const HomeScreen = () => {
             value={value.companyValue}
           />
 
-          <Button title="Criar cliente" onPress={createUser} />
+          <Button
+            title="Criar cliente"
+            onPress={() => {
+              if (value.name === "") {
+                createUser();
+              } else {
+                updateUser(value.id);
+              }
+            }}
+          />
         </ContentModal>
       </Animated.View>
     </>
