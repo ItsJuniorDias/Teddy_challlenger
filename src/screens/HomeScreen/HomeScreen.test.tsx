@@ -11,6 +11,7 @@ jest.mock("axios", () => ({
   create: jest.fn(),
   delete: jest.fn(),
   post: jest.fn(),
+  patch: jest.fn(),
   get: jest.fn(() => ({
     data: {
       clients: [
@@ -95,5 +96,32 @@ describe("Behavior HomeScreen", () => {
     debug();
 
     expect(flatlist).toBeTruthy();
+  });
+
+  it("should call funtion update user", () => {
+    const { getByTestId, update, debug } = render(screenRender);
+
+    update(screenRender);
+
+    const flatlist = getByTestId("flatlist_id");
+
+    flatlist.props
+      .renderItem({
+        item: {
+          id: 1,
+          name: "",
+          salary: 0,
+          companyValuation: 0,
+          createdAt: "2024-11-24T14:11:48.823Z",
+          updatedAt: "2024-11-24T14:11:48.823Z",
+        },
+      })
+      .props.onPressPlus();
+
+    const button = getByTestId("touchable_id");
+
+    fireEvent.press(button);
+
+    expect(button).toBeTruthy();
   });
 });
