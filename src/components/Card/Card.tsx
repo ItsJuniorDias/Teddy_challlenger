@@ -5,13 +5,13 @@ import { IconAdd } from "../../assets/icons";
 import { Container, TitleBold, Text, Row, Image } from "./styles";
 
 export interface CardProps {
-  id: number;
+  id?: number;
   onPressAdd: () => void;
   onPressPlus: () => void;
   onPressDelete: (id: number) => void;
-  salary: number;
-  enterprises: number;
-  name: string;
+  salary?: number;
+  enterprises?: number;
+  name?: string;
 }
 
 export const Card = ({

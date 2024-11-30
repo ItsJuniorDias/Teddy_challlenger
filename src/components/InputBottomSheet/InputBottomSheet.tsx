@@ -25,7 +25,7 @@ export const InputBottomSheet = ({
       <Input
         testID={testID}
         value={value}
-        onChangeText={onChange}
+        onChangeText={(item) => onChange(item)}
         placeholder={textPlaceHolder}
         placeholderTextColor={theme.colors.white}
       />

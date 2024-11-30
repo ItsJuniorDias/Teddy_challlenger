@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Alert,
   Animated,
@@ -12,7 +12,8 @@ import { IconBurger } from "../../assets/icons";
 import { Button, Card, InputBottomSheet } from "../../components";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { theme } from "../../theme/theme";
-import axios from "axios";
+
+import { useHomeScreen } from "../../hooks";
 
 import {
   Container,
@@ -31,119 +32,23 @@ import {
   TitleBottomSheet,
 } from "./styles";
 
-const baseURL = "https://boasorte.teddybackoffice.com.br";
-
-interface ValueProps {
-  id?: number;
-  name?: string;
-  currency?: number;
-  companyValue?: number;
-}
-
 export const HomeScreen = () => {
-  const [data, setData] = useState([]);
-  const [expanded, setExpanded] = useState(false);
-  const animation = useRef(new Animated.Value(0)).current;
-
-  const [value, setValue] = useState<ValueProps>({
-    id: 0,
-    name: "",
-    currency: 0,
-    companyValue: 0,
-  });
-
-  const onChangeName = (item: string) => {
-    setValue((prevState) => ({
-      ...prevState,
-      name: item,
-    }));
-  };
-
-  const onChangeCurrency = (item: string) => {
-    setValue((prevState) => ({
-      ...prevState,
-      currency: Number(item),
-    }));
-  };
-
-  const onChangeCompany = (item: string) => {
-    setValue((prevState) => ({
-      ...prevState,
-      companyValue: Number(item),
-    }));
-  };
-
-  const updateUser = async (id: number) => {
-    await axios.patch(`${baseURL}/users/${id}`, value);
-
-    toggleExpand({});
-
-    fetch();
-  };
-
-  const createUser = async () => {
-    await axios.post(`${baseURL}/users`, value);
-
-    toggleExpand({});
-
-    fetch();
-  };
-
-  const toggleExpand = ({ id, name, currency, companyValue }: ValueProps) => {
-    if (name !== "" && currency !== 0 && companyValue !== 0) {
-      setValue(() => ({
-        id: id,
-        name: name,
-        currency: currency,
-        companyValue: companyValue,
-      }));
-    }
-
-    const finalValue = expanded ? 0 : 502;
-
-    Animated.timing(animation, {
-      toValue: finalValue,
-      duration: 300,
-      useNativeDriver: false,
-    }).start();
-
-    setExpanded(!expanded);
-  };
-
-  const fetch = async () => {
-    try {
-      const { data } = await axios.get(`${baseURL}/users`);
-
-      setData(data.clients);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const {
+    data,
+    value,
+    alertItem,
+    createUser,
+    animation,
+    fetch,
+    onChangeCompany,
+    onChangeCurrency,
+    onChangeName,
+    toggleExpand,
+  } = useHomeScreen();
 
   useEffect(() => {
     fetch();
   }, []);
-
-  const removeItem = async (id: number) => {
-    await axios.delete(`${baseURL}/users/${id}`);
-
-    fetch();
-  };
-
-  const alertItem = (id: number) => {
-    Alert.alert(
-      "Excluir cliente:",
-      "Tem certeza que deseja excluir o cliente Eduardo?",
-      [
-        {
-          text: "Cancelar",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        { text: "Excluir cliente", onPress: () => removeItem(id) },
-      ]
-    );
-  };
 
   return (
     <>
@@ -245,11 +150,7 @@ export const HomeScreen = () => {
           <Button
             title="Criar cliente"
             onPress={() => {
-              if (value.name === "") {
-                createUser();
-              } else {
-                updateUser(value.id);
-              }
+              createUser();
             }}
           />
         </ContentModal>
