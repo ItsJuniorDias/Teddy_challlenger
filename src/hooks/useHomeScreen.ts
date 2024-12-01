@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
-import { Alert, Animated, View } from "react-native";
+import { Alert, Animated } from "react-native";
 
 const baseURL = "https://boasorte.teddybackoffice.com.br";
 
@@ -14,6 +14,7 @@ interface ValueProps {
 export const useHomeScreen = () => {
   const [data, setData] = useState([]);
   const [expanded, setExpanded] = useState(false);
+  const [edit, setEdit] = useState(false);
 
   const animation = useRef(new Animated.Value(0)).current;
 
@@ -27,21 +28,21 @@ export const useHomeScreen = () => {
   const onChangeName = (item: string) => {
     setValue((prevState) => ({
       ...prevState,
-      name: item,
+      name: item ?? "",
     }));
   };
 
-  const onChangeCurrency = (item: string) => {
+  const onChangeCurrency = (item: number) => {
     setValue((prevState) => ({
       ...prevState,
-      currency: Number(item),
+      currency: item ?? 0,
     }));
   };
 
-  const onChangeCompany = (item: string) => {
+  const onChangeCompany = (item: number) => {
     setValue((prevState) => ({
       ...prevState,
-      companyValue: Number(item),
+      companyValue: item ?? 0,
     }));
   };
 
@@ -56,6 +57,17 @@ export const useHomeScreen = () => {
   };
 
   const toggleExpand = ({ id, name, currency, companyValue }: ValueProps) => {
+    if (name !== "" && currency !== 0 && companyValue !== 0) {
+      setValue((prevState) => ({
+        ...prevState,
+        id: id,
+      }));
+
+      onChangeName(name);
+      onChangeCompany(companyValue);
+      onChangeCurrency(currency);
+    }
+
     const finalValue = expanded ? 0 : 502;
 
     Animated.timing(animation, {
@@ -68,11 +80,13 @@ export const useHomeScreen = () => {
   };
 
   const createUser = async () => {
+    console.log(value, "CREATE USER");
+
     try {
       await axios.post(`${baseURL}/users`, {
         name: value.name,
-        salary: value.currency,
-        companyValuation: value.companyValue,
+        salary: Number(value.currency),
+        companyValuation: Number(value.companyValue),
       });
     } catch (error) {
       console.log(error);
@@ -85,6 +99,34 @@ export const useHomeScreen = () => {
 
   const removeItem = async (id: number) => {
     await axios.delete(`${baseURL}/users/${id}`);
+
+    fetch();
+  };
+
+  const updateItem = async (id: number) => {
+    console.log(
+      {
+        id,
+        name: value.name,
+        salary: value.currency,
+        companyValuation: value.companyValue,
+      },
+      "PROPS"
+    );
+
+    try {
+      const response = await axios.patch(`${baseURL}/users/${id}`, {
+        name: value.name,
+        salary: value.currency,
+        companyValuation: value.companyValue,
+      });
+
+      console.log(response, "RESPONSE");
+    } catch (error) {
+      console.log(error, "ERRR");
+    }
+
+    toggleExpand({});
 
     fetch();
   };
@@ -115,5 +157,8 @@ export const useHomeScreen = () => {
     onChangeCurrency,
     alertItem,
     toggleExpand,
+    updateItem,
+    edit,
+    setEdit,
   };
 };
