@@ -98,7 +98,11 @@ export const useHomeScreen = () => {
   };
 
   const removeItem = async (id: number) => {
-    await axios.delete(`${baseURL}/users/${id}`);
+    try {
+      await axios.delete(`${baseURL}/users/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
 
     fetch();
   };

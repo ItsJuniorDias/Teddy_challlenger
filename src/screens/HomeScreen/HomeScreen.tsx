@@ -52,8 +52,6 @@ export const HomeScreen = () => {
     fetch();
   }, []);
 
-  console.log(value, "VALUE");
-
   return (
     <>
       <StatusBar
@@ -74,6 +72,7 @@ export const HomeScreen = () => {
           <FlatList
             testID="flatlist_id"
             data={data}
+            contentContainerStyle={styles.flatlist}
             ListHeaderComponent={
               <ContentHeader>
                 <Title>
@@ -163,8 +162,6 @@ export const HomeScreen = () => {
           <Button
             title="Criar cliente"
             onPress={() => {
-              console.log(edit, "EDIT");
-
               if (edit) {
                 createUser();
               } else {
@@ -185,5 +182,9 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
+  },
+  flatlist: {
+    paddingLeft: 24,
+    paddingRight: 24,
   },
 });

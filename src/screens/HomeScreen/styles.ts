@@ -53,8 +53,6 @@ export const TitleBold = styled.Text`
 export const Content = styled.View`
   align-items: center;
   margin-top: 24px;
-  padding-left: 24px;
-  padding-right: 24px;
 `;
 
 export const ButtonOutline = styled.TouchableOpacity`
