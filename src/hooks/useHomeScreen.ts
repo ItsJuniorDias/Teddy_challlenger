@@ -89,6 +89,8 @@ export const useHomeScreen = () => {
     fetch();
   };
 
+  console.log(data, "data");
+
   const alertItem = (id: number) => {
     Alert.alert(
       "Excluir cliente:",
