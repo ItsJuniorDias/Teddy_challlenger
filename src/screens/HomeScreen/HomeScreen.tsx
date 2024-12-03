@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import {
-  Alert,
   Animated,
   FlatList,
   StatusBar,
@@ -44,6 +43,9 @@ export const HomeScreen = () => {
     onChangeCurrency,
     onChangeName,
     toggleExpand,
+    updateItem,
+    edit,
+    setEdit,
   } = useHomeScreen();
 
   useEffect(() => {
@@ -70,6 +72,7 @@ export const HomeScreen = () => {
           <FlatList
             testID="flatlist_id"
             data={data}
+            contentContainerStyle={styles.flatlist}
             ListHeaderComponent={
               <ContentHeader>
                 <Title>
@@ -87,6 +90,8 @@ export const HomeScreen = () => {
                 onPressAdd={() => {}}
                 onPressDelete={(id) => alertItem(id)}
                 onPressPlus={() => {
+                  setEdit(false);
+
                   toggleExpand({
                     id: item.id,
                     name: item.name,
@@ -98,7 +103,12 @@ export const HomeScreen = () => {
             )}
             ListFooterComponent={
               <ContentButton>
-                <ButtonOutline onPress={() => toggleExpand({})}>
+                <ButtonOutline
+                  onPress={() => {
+                    setEdit(true);
+                    toggleExpand({});
+                  }}
+                >
                   <TextButton>Criar cliente</TextButton>
                 </ButtonOutline>
               </ContentButton>
@@ -132,6 +142,7 @@ export const HomeScreen = () => {
             onChange={(item) => onChangeName(item)}
             value={value.name}
           />
+
           <InputBottomSheet
             testID="input_currency"
             title="Salário"
@@ -139,6 +150,7 @@ export const HomeScreen = () => {
             onChange={(item) => onChangeCurrency(item)}
             value={value.currency}
           />
+
           <InputBottomSheet
             testID="input_company"
             title="Valor da empresa"
@@ -150,7 +162,11 @@ export const HomeScreen = () => {
           <Button
             title="Criar cliente"
             onPress={() => {
-              createUser();
+              if (edit) {
+                createUser();
+              } else {
+                updateItem(value.id);
+              }
             }}
           />
         </ContentModal>
@@ -166,5 +182,9 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
+  },
+  flatlist: {
+    paddingLeft: 24,
+    paddingRight: 24,
   },
 });

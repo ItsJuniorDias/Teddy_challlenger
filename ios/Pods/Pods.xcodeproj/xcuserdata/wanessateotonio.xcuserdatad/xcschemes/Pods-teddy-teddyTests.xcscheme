@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2290DFBC911F259C701091854952546B"
-               BuildableName = "libPods-teddy-teddyTests.a"
+               BuildableName = "Pods_teddy_teddyTests.framework"
                BlueprintName = "Pods-teddy-teddyTests"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
